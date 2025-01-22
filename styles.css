@@ -1,0 +1,880 @@
+/* Custom Cursor */
+.custom-cursor {
+	width: 20px;
+	height: 20px;
+	border: 2px solid var(--primary-color);
+	border-radius: 50%;
+	position: fixed;
+	pointer-events: none;
+	z-index: 9999;
+	transition: transform 0.1s ease;
+	mix-blend-mode: difference;
+}
+
+/* Cursor-triggered background effect */
+.cursor-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: -2;
+	background: rgba(10, 10, 10, 0.92);
+}
+
+.cursor-light {
+	position: fixed;
+	width: 800px;
+	height: 800px;
+	background: radial-gradient(circle, 
+        rgba(14, 255, 98, 0.719) 0%,
+        rgba(0, 245, 255, 0.15) 25%,
+        rgba(0, 245, 255, 0.05) 50%,
+        transparent 70%
+    );
+	border-radius: 30%;
+	pointer-events: none;
+	mix-blend-mode: lighten;
+	will-change: transform;
+	transform: translate(-50%, -50%);
+	z-index: -1;
+	filter: blur(10px);
+}
+
+/* Cursor-triggered glow effect */
+body:hover .cursor-background {
+	filter: brightness(1) contrast(1);
+	mask: radial-gradient(
+		circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+		rgba(255, 255, 255, 1) 0%,
+		rgba(255, 255, 255, 0.5) 30%,
+		transparent 50%
+	);
+	-webkit-mask: radial-gradient(
+		circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+		rgba(255, 255, 255, 1) 0%,
+		rgba(255, 255, 255, 0.5) 30%,
+		transparent 50%
+	);
+}
+
+/* Ensure other content is above the cursor effect */
+.hero, .nav-container, main, footer, .card, .card-content, .text-content {
+	position: relative;
+	z-index: 3;
+}
+
+/* Background Pattern */
+.background-pattern {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	z-index: -1;
+}
+
+.pattern-dot {
+	position: absolute;
+	width: 4px;
+	height: 4px;
+	background: var(--primary-color);
+	border-radius: 50%;
+	opacity: 0.15;
+	filter: blur(1px);
+	animation: float 6s infinite ease-in-out;
+}
+
+@keyframes float {
+	0%, 100% { transform: translate(0, 0) scale(1); }
+	50% { transform: translate(15px, -15px) scale(1.2); }
+}
+
+/* Animation and Hover Effects */
+.animate-in {
+	opacity: 0;
+	transform: translateY(30px);
+	transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-in.show {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+
+
+:root {
+	--primary-color: #04ff00;
+	--secondary-color: #a2ff00;
+	--accent-color: #ff8a05;
+	--background-color: #0A0A0A;
+	--card-bg: #141414;
+	--text-color: #F5F5F5;
+	--text-light: #B0B0B0;
+	--gradient-1: rgba(10, 10, 10, 0.98);
+	--gradient-2: rgba(20, 20, 20, 0.95);
+	--card-shadow: 0 8px 32px rgba(0, 245, 255, 0.15);
+	--section-spacing: 8rem;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* Base Styles */
+body {
+	font-family: 'Outfit', sans-serif;
+	line-height: 1.8;
+	color: var(--text-color);
+	background-color: var(--background-color);
+	margin: 0;
+	--mouse-x: 50%;
+	--mouse-y: 50%;
+}
+
+
+/* Track mouse position for glow effect */
+body::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: radial-gradient(
+		circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+		rgba(0, 245, 255, 0.1) 0%,
+		transparent 70%
+	);
+    pointer-events: none;
+    z-index: 9998;
+    mix-blend-mode: lighten;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Space Grotesk', sans-serif;
+	font-weight: 700;
+	line-height: 1.2;
+	text-align: center;
+	color: var(--text-color);
+	letter-spacing: -0.02em;
+}
+
+p {
+	text-align: center;
+	color: var(--text-light);
+}
+
+/* Section and Container Layout */
+.container {
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 0 2rem;
+	position: relative;
+}
+
+section {
+	padding: 8rem 0;
+	position: relative;
+	overflow: hidden;
+}
+
+
+section::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 150px;
+	height: 2px;
+	background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+}
+
+.approach-section, .contact-section {
+	padding: 8rem 0;
+	margin: 0;
+	background: var(--card-bg);
+	position: relative;
+}
+
+.approach-section::before, .contact-section::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: 
+		radial-gradient(circle at 20% 30%, rgba(255, 159, 67, 0.05) 0%, transparent 70%),
+		radial-gradient(circle at 80% 70%, rgba(255, 159, 67, 0.05) 0%, transparent 70%);
+	pointer-events: none;
+}
+
+.approach-steps {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 2rem;
+	margin-top: 3rem;
+}
+
+.steps-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 2rem;
+	margin: 3rem 0;
+}
+
+/* Card Grid Layout */
+.card-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 3rem;
+	margin: 4rem auto;
+	max-width: 1400px;
+	padding: 0 2rem;
+}
+
+/* Card Base */
+.card {
+	min-height: 280px;
+	padding: 3rem 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	background: rgba(20, 20, 20, 0.7);
+	backdrop-filter: blur(15px);
+	border: 1px solid rgba(255, 159, 67, 0.15);
+	border-radius: 12px;
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	position: relative;
+	overflow: hidden;
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .card-icon {
+    transform: scale(1.1);
+}
+
+/* Card Content */
+.card h3 {
+	color: var(--primary-color);
+	font-size: 1.75rem;
+	margin: 0.5rem 0 1.5rem 0;
+	letter-spacing: -0.01em;
+	line-height: 1.3;
+}
+
+.card p {
+	margin: 0;
+	max-width: 260px;
+	line-height: 1.6;
+}
+
+/* Card Hover Effect */
+.card:hover {
+	transform: translateY(-10px) scale(1.02);
+	border-color: var(--primary-color);
+	box-shadow: 
+		0 20px 40px rgba(0, 245, 255, 0.2),
+		0 0 30px rgba(0, 245, 255, 0.1);
+	z-index: 1;
+}
+
+.card::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: radial-gradient(
+		circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+		rgba(0, 245, 255, 0.1) 0%,
+		transparent 50%
+	);
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.card:hover::before {
+	opacity: 1;
+}
+
+/* Section Spacing */
+.solution-section,
+.approach-section,
+.contact-section {
+	padding: 8rem 0;
+	margin: 0;
+}
+
+
+
+
+
+/* Hover Effects */
+.challenge-card:hover, .capability-card:hover, .feature-item:hover, .step-card:hover, .step-item:hover {
+	transform: translateY(-10px) scale(1.02);
+	border-color: var(--primary-color);
+	box-shadow: 
+		0 20px 40px rgba(255, 159, 67, 0.2),
+		0 0 30px rgba(255, 159, 67, 0.1);
+	z-index: 1;
+}
+
+.contact-cta {
+	margin-top: 3rem;
+}
+
+/* Header */
+.hero {
+	position: relative;
+	min-height: 100vh;
+	color: var(--text-color);
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.hero-background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('assets/backgrounds/ComfyUI_00369_.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	z-index: -3;
+	filter: brightness(0.3);
+	transition: all 0.3s ease;
+}
+
+/* Enhanced background blending and dimming */
+.problem-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('assets/backgrounds/DALL-E-2023-11-14-17.45.47---An-impactful-image-illustrating-AI-assisted-services-as-a-network-of-interconnected-nodes-representing-real-world-solutions-offered-by-AI-Possibiliti.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: brightness(0.3);
+    transition: filter 0.3s ease;
+}
+
+.problem-section .container {
+    position: relative;
+    z-index: 3;
+}
+
+.problem-section .section-intro,
+.problem-section .problem-text {
+    position: relative;
+    z-index: 3;
+    mix-blend-mode: normal;
+    background: rgba(10, 10, 10, 0.7);
+    padding: 2rem;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+/* Remove problem-section from global glow effect */
+body:hover .problem-section {
+	filter: none;
+	mask: none;
+	-webkit-mask: none;
+	mix-blend-mode: normal;
+}
+
+.problem-section {
+	position: relative;
+	mix-blend-mode: normal;
+}
+
+.problem-section::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: inherit;
+	opacity: 0.8;
+	z-index: 1;
+}
+
+.problem-section .container {
+	position: relative;
+	z-index: 5;
+}
+
+.problem-section .section-intro,
+.problem-section .problem-text {
+	position: relative;
+	z-index: 5;
+	background: rgba(10, 10, 10, 0.85);
+	padding: 2rem;
+	border-radius: 20px;
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 159, 67, 0.1);
+}
+
+.challenges-section {
+	background: var(--card-bg);
+	position: relative;
+	z-index: 1;
+}
+
+.challenges-section .card-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 3rem;
+	margin: 4rem auto;
+	max-width: 1400px;
+	padding: 0 2rem;
+}
+
+.challenges-section .card {
+	min-height: 280px;
+	padding: 3rem 2rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	background: rgba(20, 20, 20, 0.5);
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(255, 159, 67, 0.1);
+	border-radius: 20px;
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.challenges-section .card:hover {
+	transform: translateY(-10px) scale(1.02);
+	border-color: var(--primary-color);
+	box-shadow: 
+		0 20px 40px rgba(255, 159, 67, 0.2),
+		0 0 30px rgba(255, 159, 67, 0.1);
+	z-index: 1;
+}
+
+.solution-section {
+	background: var(--card-bg);
+}
+
+.capabilities-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('assets/backgrounds/DALL-E-2023-11-14-17.46.17---A-visually-striking-image-symbolizing-AI-tools-and-automation-portrayed-as-a-futuristic-and-intricate-machinery-set-against-a-backdrop-of-a-digital.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: brightness(0.3);
+    transition: filter 0.3s ease;
+}
+
+.approach-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('assets/backgrounds/DALL-E-2023-11-14-18.12.48---An-image-representing-the-concept-of-finding-and-researching-with-AI-depicted-in-a-cosmic-style-with-clouds-and-nebulas.-The-visual-should-symbolize.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: brightness(0.3);
+    transition: filter 0.3s ease;
+}
+
+.contact-section {
+	background: var(--card-bg);
+}
+
+/* Package Section */
+.package-card {
+	background: var(--card-bg);
+	padding: 3rem 2rem;
+	border-radius: 1rem;
+	border: 1px solid rgba(255, 159, 67, 0.1);
+	transition: transform 0.3s ease;
+}
+
+.package-card:hover {
+	transform: translateY(-5px);
+	border-color: var(--primary-color);
+}
+
+/* Package Features */
+.package-features {
+	list-style: none;
+	margin: 2rem 0;
+	text-align: left;
+}
+
+.package-features li {
+	margin-bottom: 1rem;
+	padding-left: 1.5rem;
+	position: relative;
+	color: var(--text-light);
+}
+
+.package-features li::before {
+	content: '✓';
+	color: var(--primary-color);
+	position: absolute;
+	left: 0;
+}
+
+.package-subtitle {
+	color: var(--text-light);
+	margin-bottom: 2rem;
+}
+
+.package-timeline {
+	font-style: italic;
+	color: var(--primary-color);
+	margin: 2rem 0;
+}
+
+/* Contact Section */
+.contact-section {
+	background: var(--card-bg);
+	padding-bottom: 8rem;
+}
+
+.contact-cta {
+	margin-top: 4rem;
+	text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.nav-links {
+		display: none;
+	}
+	
+	.container {
+		padding: 0 1.5rem;
+	}
+	
+	h1 {
+		font-size: 2.5rem;
+	}
+	
+	h2 {
+		font-size: 2rem;
+	}
+	
+	.hero-content {
+		padding: 2rem 1rem;
+	}
+	
+	section {
+		padding: 4rem 0;
+	}
+	
+	.secondary-button {
+		margin: 1rem 0 0 0;
+	}
+	
+	.hero-cta {
+		flex-direction: column;
+		gap: 1rem;
+	}
+	
+	.approach-steps {
+		gap: 3rem;
+	}
+	
+	.package-features {
+		padding: 0 1rem;
+	}
+}
+
+/* Navigation */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    padding: 20px;
+}
+
+/* Special case for hero header */
+header.hero {
+    position: relative;
+    padding: 0;
+}
+
+header.hero .nav-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    background: rgba(10, 10, 10, 0.2);
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.nav-container:hover {
+    background: rgba(10, 10, 10, 0.4);
+}
+
+.logo {
+	font-family: 'Space Grotesk', sans-serif;
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: var(--primary-color);
+	letter-spacing: -0.02em;
+}
+
+.nav-links {
+	display: flex;
+	gap: 2rem;
+	align-items: center;
+}
+
+.nav-links a {
+	font-family: 'Space Grotesk', sans-serif;
+	font-weight: 500;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	font-size: 0.9rem;
+	color: var(--text-color);
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+	color: var(--primary-color);
+}
+
+/* Buttons */
+.primary-button, .cta-button {
+	font-family: 'Space Grotesk', sans-serif;
+	display: inline-block;
+	background-color: var(--primary-color);
+	color: var(--background-color);
+	padding: 1.1rem 2.2rem;
+	border-radius: 8px;
+	text-decoration: none;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	transition: all 0.3s ease;
+	text-transform: uppercase;
+	font-size: 0.95rem;
+}
+
+.primary-button:hover, .cta-button:hover {
+	background-color: var(--secondary-color);
+	transform: translateY(-2px);
+}
+
+.secondary-button {
+	font-family: 'Space Grotesk', sans-serif;
+	display: inline-block;
+	background-color: transparent;
+	color: var(--primary-color);
+	padding: 1.1rem 2.2rem;
+	border-radius: 8px;
+	border: 2px solid var(--primary-color);
+	text-decoration: none;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	transition: all 0.3s ease;
+	margin-left: 1rem;
+	text-transform: uppercase;
+	font-size: 0.95rem;
+}
+
+.secondary-button:hover {
+	background-color: var(--primary-color);
+	color: var(--background-color);
+}
+
+/* Cards Enhancement */
+.challenges-grid, 
+.capabilities-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 3rem;
+	padding: 2rem;
+	margin: 2rem auto 4rem;
+	max-width: 1400px;
+}
+
+.approach-steps,
+.steps-grid {
+	padding: 3rem;
+	margin: 3rem auto 4rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 3.5rem;
+	max-width: 1400px;
+}
+
+/* Section Headers */
+h2 {
+	font-size: 3rem;
+	letter-spacing: -0.02em;
+	margin-bottom: 2rem;
+}
+
+.section-intro {
+	font-size: 1.5rem;
+	max-width: 800px;
+	margin: 0 auto 3rem;
+	color: var(--text-light);
+}
+
+/* Hero Content */
+.hero-content {
+	position: relative;
+	z-index: 2;
+}
+
+h1 {
+	font-size: 4rem;
+	letter-spacing: -0.03em;
+	margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+	font-family: 'Outfit', sans-serif;
+	font-size: 1.35rem;
+	font-weight: 300;
+	color: var(--text-light);
+	margin-bottom: 2rem;
+	letter-spacing: 0.01em;
+}
+
+/* Cursor-triggered glow effect */
+body:hover .hero-background {
+	filter: brightness(0.7);
+	mask: radial-gradient(
+		circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+		rgba(255, 255, 255, 1) 0%,
+		rgba(255, 255, 255, 0.5) 20%,
+		transparent 40%
+	);
+	-webkit-mask: radial-gradient(
+		circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+		rgba(255, 255, 255, 1) 0%,
+		rgba(255, 255, 255, 0.5) 20%,
+		transparent 40%
+	);
+}
+
+/* Section backgrounds with cursor effect */
+.problem-section, .capabilities-section, .approach-section {
+    position: relative;
+    z-index: 1;
+    background: none;
+}
+
+.section-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: brightness(0.3);
+    transition: all 0.3s ease;
+}
+
+/* Cursor-triggered glow effect for all backgrounds */
+body:hover .section-background {
+    filter: brightness(0.7);
+    mask: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.5) 20%,
+        transparent 40%
+    );
+    -webkit-mask: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 255, 255, 1) 0%,
+        rgba(255, 255, 255, 0.5) 20%,
+        transparent 40%
+    );
+}
+
+/* Ensure content stays above background */
+.problem-section .container,
+.capabilities-section .container,
+.approach-section .container,
+.card-grid,
+.card,
+.section-intro,
+.problem-text {
+    position: relative;
+    z-index: 5;
+    mix-blend-mode: normal;
+}
+
+/* Remove any mask/filter from content */
+.card, .section-intro, .problem-text, .nav-container {
+    mask: none !important;
+    -webkit-mask: none !important;
+    filter: none !important;
+}
+
+/* Ensure navbar stays above and unaffected */
+.nav-container {
+    position: fixed;
+    z-index: 9999;
+    mix-blend-mode: normal;
+}
+
+/* Section specific backgrounds */
+.problem-section .section-background {
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('assets/backgrounds/DALL-E-2023-11-14-17.45.47---An-impactful-image-illustrating-AI-assisted-services-as-a-network-of-interconnected-nodes-representing-real-world-solutions-offered-by-AI-Possibiliti.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.capabilities-section .section-background {
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('assets/backgrounds/DALL-E-2023-11-14-17.46.17---A-visually-striking-image-symbolizing-AI-tools-and-automation-portrayed-as-a-futuristic-and-intricate-machinery-set-against-a-backdrop-of-a-digital.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.approach-section .section-background {
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('assets/backgrounds/DALL-E-2023-11-14-18.12.48---An-image-representing-the-concept-of-finding-and-researching-with-AI-depicted-in-a-cosmic-style-with-clouds-and-nebulas.-The-visual-should-symbolize.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Remove any background from sections themselves */
+.capabilities-section, .approach-section {
+    background: none;
+}
+
