@@ -365,13 +365,13 @@ section::after {
 	background-position: center;
 	background-repeat: no-repeat;
 	z-index: -3;
-	filter: brightness(0.3);
+	filter: brightness(0.66);
 	transition: all 0.3s ease;
 }
 
 /* Enhanced background blending and dimming */
 .problem-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('assets/backgrounds/DALL-E-2023-11-14-17.45.47---An-impactful-image-illustrating-AI-assisted-services-as-a-network-of-interconnected-nodes-representing-real-world-solutions-offered-by-AI-Possibiliti.png');
+    background: linear-gradient(rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.95)), url('assets/backgrounds/DALL-E-2023-11-14-17.45.47---An-impactful-image-illustrating-AI-assisted-services-as-a-network-of-interconnected-nodes-representing-real-world-solutions-offered-by-AI-Possibiliti.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
